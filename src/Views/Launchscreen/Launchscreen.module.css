@@ -1,0 +1,34 @@
+.logo {
+  width: 20rem;
+  height: auto;
+  animation: fadein 4s;
+}
+.Container_logo {
+  align-items: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 25px;
+  font-size: 21px;
+  text-align: center;
+  animation: cambioRGB 3s linear 4s;
+  animation-fill-mode: both;
+}
+
+@keyframes cambioRGB {
+  100% {
+    min-height: 32vh;
+
+    background-color: DarkSlateBlue;
+  }
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* 600px */

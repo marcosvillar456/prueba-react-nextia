@@ -1,4 +1,4 @@
-import { LOGIN, GETBENEVIT, GETLISTAS } from "../Constants";
+import { LOGIN, GETWALLETS, GETLISTAS } from "../Constants";
 import axios from "axios";
 
 export function login(name, password) {
@@ -11,26 +11,39 @@ export function login(name, password) {
       const data = await peticion.data;
       return dispatch({
         type: LOGIN,
-        payload: { data: data, error: false },
+        payload: {
+          data: data,
+          succes: true,
+          token: peticion.headers.authorization,
+        },
       });
     } catch (err) {
       return dispatch({
         type: LOGIN,
-        payload: { data: null, error: true },
+        payload: { succes: false },
       });
     }
   };
 }
-export function getBenevit() {
+export function Listas(token) {
+  console.log(token);
   return async function (dispatch) {
     try {
       const peticion = await axios.get(
-        "https://prueba-api.nextia.mx/api/v1/member/wallets"
+        "https://prueba-api.nextia.mx/api/v1/member/landing_benevits",
+        {
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
       );
       const data = await peticion.data;
       return dispatch({
-        type: GETBENEVIT,
-        payload: data,
+        type: GETLISTAS,
+        payload: {
+          locked: data.locked,
+          unlocked: data.unlocked,
+        },
       });
     } catch (err) {
       console.log(err);
@@ -38,16 +51,16 @@ export function getBenevit() {
   };
 }
 
-export function getListas() {
+export function getWallets() {
   return async function (dispatch) {
     try {
       const peticion = await axios.get(
-        "https://prueba-api.nextia.mx/api/v1/member/landing_benevits",
-        { user: { email: "prueba@nextia.mx", password: "PruebaNextia2021" } }
+        "https://prueba-api.nextia.mx/api/v1/member/wallets"
       );
       const data = await peticion.data;
+
       return dispatch({
-        type: GETLISTAS,
+        type: GETWALLETS,
         payload: data,
       });
     } catch (err) {

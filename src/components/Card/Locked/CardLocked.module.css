@@ -1,0 +1,18 @@
+.card {
+  word-wrap: break-word;
+  border: 1px solid;
+  margin: 2rem;
+  width: 300px;
+  min-height: 300px;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  color: red;
+  font-weight: 900;
+}
+.container_img img {
+  width: 80px;
+}

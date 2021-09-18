@@ -1,27 +1,35 @@
 import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getBenevit } from "../../Redux/Actions";
-import Card from "../../components/Card/Card";
+import { getWallets, Listas } from "../../Redux/Actions";
+import CardUnlocked from "../../components/Card/Unlocked/CardUnlocked";
+import CardLocked from "../../components/Card/Locked/CardLocked";
+import Loading from "../../components/Loading/Loading";
 import styles from "./Home.module.css";
 export default function Home() {
   const dispatch = useDispatch();
-  const Benevits = useSelector((state) => state.Benevits);
+  const Token = useSelector((state) => state.token);
+
+  const Locked = useSelector((state) => state.Locked);
+  const Unlocked = useSelector((state) => state.Unlocked);
 
   useEffect(() => {
-    dispatch(getBenevit());
+    dispatch(getWallets());
+    dispatch(Listas(Token));
     // eslint-disable-next-line
   }, []);
 
-  return Benevits[0] ? (
+  return Locked[0] ? (
     <Fragment>
-      <h1>Home</h1>
       <div className={styles.cards}>
-        {Benevits.map((data, index) => (
-          <Card objeto={data} key={index} />
+        {Locked.map((data, index) => (
+          <CardUnlocked objeto={data} key={index} />
+        ))}
+        {Unlocked.map((data, index) => (
+          <CardLocked objeto={data} key={index} />
         ))}
       </div>
     </Fragment>
   ) : (
-    <h1>Loading...</h1>
+    <Loading />
   );
 }

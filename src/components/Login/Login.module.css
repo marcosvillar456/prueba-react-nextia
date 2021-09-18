@@ -26,12 +26,6 @@
   background-color: #9f9f9f;
 }
 .active {
-  margin: 1rem;
-  padding: 5px;
-  width: 80%;
-  max-width: 17rem;
-  border-radius: 30px;
-  border: 1px;
   background-color: #ec5056;
 }
 .forgotPassword {

@@ -5,6 +5,7 @@ import { login } from "../../Redux/Actions";
 import { useHistory } from "react-router-dom";
 
 import styles from "./Login.module.css";
+import Modal from "../Modal/Modal";
 
 export function validate(input) {
   let errors = {};
@@ -19,8 +20,9 @@ export function validate(input) {
 export default function Login() {
   const [Input, setInput] = useState({ Email: "", password: "" });
   const [errors, setErrors] = useState({});
+  const [active, setActive] = useState(false);
   const dispatch = useDispatch();
-  const Login = useSelector((state) => state.login);
+  let Login = useSelector((state) => state.succes);
   let history = useHistory();
 
   function handleChange(e) {
@@ -35,6 +37,19 @@ export default function Login() {
       })
     );
   }
+
+  function shoot() {
+    console.log("click");
+    setActive(true);
+  }
+
+  async function ingresar() {
+    if (Object.keys(errors).length === 0) {
+      return await dispatch(login(Input.Email, Input.password));
+    }
+  }
+  // eslint-disable-next-line no-unused-expressions
+  Login === true ? history.push("/home") : null;
 
   return (
     <Fragment>
@@ -68,20 +83,25 @@ export default function Login() {
                 : true
               : true
           }
-          className={styles.button}
-          onClick={async () => {
-            if (Object.keys(errors).length === 0) {
-              await dispatch(login(Input.Email, Input.password));
-              if (!Login?.data) {
-                return history.push("/home");
-              }
-            }
+          className={`${styles.button} ${
+            Input.password && Input.Email !== ""
+              ? Object.keys(errors).length === 0
+                ? styles.active
+                : true
+              : true
+          }`}
+          onClick={() => {
+            ingresar();
           }}
         >
           Enviar
         </button>
       </div>
-      {Login?.error === true || Login !== null ? "Error" : null}
+      {Login === false ? "Error" : null}
+      <div>
+        <button onClick={shoot}>Take the shot!</button>
+      </div>
+      <Modal active={active} set={setActive} />
     </Fragment>
   );
 }

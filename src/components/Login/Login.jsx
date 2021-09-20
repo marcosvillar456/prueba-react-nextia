@@ -9,14 +9,14 @@ export function validate(input) {
   let errors = {};
   if (!input.Email) {
     errors.Email = "error Email";
-  } else if (!input.password) {
-    errors.password = "error password";
+  } else if (!input.Password) {
+    errors.Password = "error Password";
   }
   return errors;
 }
 
 export default function Login() {
-  const [Input, setInput] = useState({ Email: "", password: "" });
+  const [Input, setInput] = useState({ Email: "", Password: "" });
   const [errors, setErrors] = useState({});
   const [active, setActive] = useState();
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ export default function Login() {
   async function ingresar(e) {
     e.preventDefault();
     if (Object.keys(errors).length === 0) {
-      const peticion = await dispatch(login(Input.Email, Input.password));
+      const peticion = await dispatch(login(Input.Email, Input.Password));
       peticion === undefined ? setActive(true) : history.push("/home");
     }
   }
@@ -46,6 +46,11 @@ export default function Login() {
     var keycode = e.keyCode;
     if (keycode === "13") {
       ingresar(e);
+    }
+  }
+  function inputCharacters(event) {
+    if (event.keyCode == 13) {
+      document.getElementById("Password").focus();
     }
   }
   return (
@@ -59,6 +64,7 @@ export default function Login() {
           className={styles.input}
           value={Input.Email}
           onChange={handleChange}
+          onKeyUp={(e) => inputCharacters(e)}
         />
         <input
           className={styles.input}
@@ -66,7 +72,7 @@ export default function Login() {
           id="Password"
           name="Password"
           placeholder="Password"
-          value={Input.password}
+          value={Input.Password}
           onChange={handleChange}
           autoComplete="on"
           onKeyUp={(e) => onKeyUp(e)}
@@ -76,14 +82,14 @@ export default function Login() {
         </div>
         <button
           disabled={
-            Input.password && Input.Email !== ""
+            Input.Password && Input.Email !== ""
               ? Object.keys(errors).length === 0
                 ? false
                 : true
               : true
           }
           className={`${styles.button} ${
-            Input.password && Input.Email !== ""
+            Input.Password && Input.Email !== ""
               ? Object.keys(errors).length === 0
                 ? styles.active
                 : true

@@ -1,5 +1,6 @@
 import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import { getWallets, Listas } from "../../Redux/Actions";
 import CardUnlocked from "../../components/Card/Unlocked/CardUnlocked";
@@ -8,6 +9,8 @@ import Loading from "../../components/Loading/Loading";
 import styles from "./Home.module.css";
 export default function Home() {
   const dispatch = useDispatch();
+  const history = useHistory();
+
   const Token = useSelector((state) => state.token);
 
   const Locked = useSelector((state) => state.Locked);
@@ -15,7 +18,11 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getWallets());
+
     dispatch(Listas(Token));
+    if (!Token) {
+      history.push("/");
+    }
     // eslint-disable-next-line
   }, []);
 

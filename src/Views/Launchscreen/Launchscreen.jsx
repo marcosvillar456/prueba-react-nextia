@@ -6,7 +6,7 @@ export default function Launchscreen() {
   return (
     <Fragment>
       <header className={styles.Container_logo}>
-        <img src={logo} className={styles.logo} alt="logo" />
+        <img src={logo} className={styles.logo} alt="logo" />{" "}
       </header>
       <div className={styles.container_login}>
         <Login />

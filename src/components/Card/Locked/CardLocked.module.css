@@ -1,18 +1,51 @@
 .card {
-  word-wrap: break-word;
+  position: relative;
+  width: 320px;
+  height: 420px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 1rem;
+  border-color: black;
   border: 1px solid;
-  margin: 2rem;
-  width: 300px;
-  min-height: 300px;
 }
-.container {
+
+.card .imgBx {
+  position: relative;
+  width: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  color: red;
-  font-weight: 900;
+  padding-top: 20px;
 }
-.container_img img {
-  width: 80px;
+.card .imgBx img {
+  max-width: 80%;
+  transition: 0.4s;
+}
+.card:hover .imgBx img {
+  max-width: 50%;
+}
+.card .contextBx {
+  position: relative;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.card .contextBx .buy {
+  position: relative;
+  padding: 10px 30px;
+  top: 200px;
+  opacity: 0;
+  margin-top: 15px;
+  background-color: #ec5056;
+  border: 0px;
+  border-radius: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: 0.7s;
+}
+.card:hover .contextBx .buy {
+  top: 0;
+  opacity: 1;
 }

@@ -1,4 +1,4 @@
-import { LOGIN, GETWALLETS, GETLISTAS } from "../Constants";
+import { LOGIN, GETWALLETS, GETLISTAS, LOGOUT } from "../Constants";
 import axios from "axios";
 
 export function login(name, password) {
@@ -9,24 +9,36 @@ export function login(name, password) {
         { user: { email: name, password: password } }
       );
       const data = await peticion.data;
+
       return dispatch({
         type: LOGIN,
         payload: {
-          data: data,
           succes: true,
+          data: data,
           token: peticion.headers.authorization,
         },
       });
     } catch (err) {
-      return dispatch({
-        type: LOGIN,
-        payload: { succes: false },
-      });
+      return console.log("error");
     }
   };
 }
+
+export function Logout() {
+  return async function (dispatch) {
+    try {
+      const peticion = await axios.delete(
+        " https://prueba-api.nextia.mx/api/v1/logout"
+      );
+      const data = peticion.data;
+      return dispatch({ type: LOGOUT, payload: data });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+
 export function Listas(token) {
-  console.log(token);
   return async function (dispatch) {
     try {
       const peticion = await axios.get(

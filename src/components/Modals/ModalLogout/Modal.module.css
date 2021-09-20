@@ -1,0 +1,39 @@
+.modal {
+  background-color: white;
+  width: 250px;
+  height: 250px;
+  z-index: 1000000;
+  margin: 0 auto;
+  border-radius: 11px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 50%;
+  border: 0.2px solid;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.title {
+  font-size: 20px;
+  font-weight: 600;
+}
+.button {
+  border: 1px;
+  margin: 2rem 1rem 0px 1rem;
+  padding: 10px;
+  border-radius: 10px;
+}
+.confirm {
+  background-color: #3f51b5;
+  color: white;
+  font-weight: 600;
+}
+.cancel {
+  background-color: white;
+  border-color: #3f51b5;
+  border: 1px solid;
+  color: #3f51b5;
+  font-weight: 600;
+}

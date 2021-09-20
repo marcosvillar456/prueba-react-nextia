@@ -1,5 +1,6 @@
 import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { getWallets, Listas } from "../../Redux/Actions";
 import CardUnlocked from "../../components/Card/Unlocked/CardUnlocked";
 import CardLocked from "../../components/Card/Locked/CardLocked";
@@ -22,10 +23,10 @@ export default function Home() {
     <Fragment>
       <div className={styles.cards}>
         {Locked.map((data, index) => (
-          <CardUnlocked objeto={data} key={index} />
+          <CardLocked objeto={data} key={index} />
         ))}
         {Unlocked.map((data, index) => (
-          <CardLocked objeto={data} key={index} />
+          <CardUnlocked objeto={data} key={index} />
         ))}
       </div>
     </Fragment>

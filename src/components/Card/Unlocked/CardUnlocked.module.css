@@ -12,7 +12,11 @@
   align-items: center;
   color: red;
   font-weight: 900;
+  border-bottom: 1px solid;
+  border-color: black;
+  min-height: 40px;
 }
 .container_img img {
+  margin-top: 10px;
   width: 80px;
 }

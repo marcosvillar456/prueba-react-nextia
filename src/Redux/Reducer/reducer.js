@@ -1,4 +1,5 @@
-const { LOGIN, GETWALLETS, GETLISTAS } = require("../Constants");
+const { LOGIN, GETWALLETS, GETLISTAS, LOGOUT } = require("../Constants");
+
 const initialState = {
   login: null,
   Wallets: [],
@@ -17,10 +18,19 @@ export default function userReducer(state = initialState, action) {
         token: action.payload.token,
       };
     }
+    case LOGOUT: {
+      return {
+        ...state,
+        Wallets: [],
+        Locked: [],
+        unlocked: [],
+        token: "",
+      };
+    }
+
     case GETWALLETS: {
       return {
         ...state,
-
         Wallets: action.payload,
       };
     }

@@ -1,26 +1,33 @@
 .logo {
   width: 20rem;
   height: auto;
+  position: absolute;
   animation: fadein 4s;
 }
 .Container_logo {
-  align-items: center;
-  min-height: 100vh;
+  min-height: 80vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 25px;
-  font-size: 21px;
   text-align: center;
   animation: cambioRGB 3s linear 4s;
   animation-fill-mode: both;
+  align-items: center;
 }
-
+.container_login {
+  text-align: -webkit-center;
+  animation: fadein 2s linear 7s;
+  animation-fill-mode: both;
+}
 @keyframes cambioRGB {
   100% {
     min-height: 32vh;
-
-    background-color: DarkSlateBlue;
+  }
+}
+@keyframes login {
+  100% {
+    display: block !important;
   }
 }
 @keyframes fadein {

@@ -1,7 +1,13 @@
-import "./Menu.css";
+import { useState } from "react";
 import $ from "jquery";
-import logo from "../../logo.png";
+
+import "./Menu.css";
+import logo from "../../assets/logo.png";
+import ModalLogout from "../Modals/ModalLogout/ModalLogout";
+
 export default function Menu() {
+  const [active, setActive] = useState();
+
   $(window).scroll(function () {
     if (this.scrollY > 20) {
       $(".navbar").addClass("sticky");
@@ -16,33 +22,24 @@ export default function Menu() {
   }
   return (
     <div>
-      <nav class="navbar">
-        <div class="max-width">
-          <div class="logo">
+      <nav className="navbar">
+        <div className="max-width">
+          <div className="logo">
             <img src={logo} style={{ width: 100 }} alt="logo" />
           </div>
-          <ul class="menu">
-            <li>
-              <a href="#home">Home</a>
-            </li>
-            <li>
-              <a href="#about">Sobre mi</a>
-            </li>
-            <li>
-              <a href="#skills">Skills</a>
-            </li>
-            <li>
-              <a href="#Proyects">Proyectos</a>
-            </li>
-            <li>
-              <a href="#contact">Contactos</a>
+          <ul className="menu">
+            <li onClick={() => setActive(true)}>
+              <span>Logout</span>
             </li>
           </ul>
-          <div class="btn-menu" onClick={() => myfunction()}>
-            <i class="fas fa-bars"></i>
+          <div className="btn-menu" onClick={() => myfunction()}>
+            <i className="fas fa-bars"></i>
           </div>
         </div>
       </nav>
+      {active === true ? (
+        <ModalLogout setActive={setActive} active={active} />
+      ) : null}
     </div>
   );
 }

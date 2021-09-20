@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   padding: 2rem;
+  max-width: 312px;
 }
 
 .input {
@@ -13,17 +14,19 @@
   border-top-style: initial;
   border-right-style: initial;
   border-left-style: initial;
-  width: 80%;
+  width: 100%;
   border-width: 0px 0px 1px;
 }
 .button {
   margin: 1rem;
-  padding: 5px;
+  padding: 8px;
   width: 80%;
   max-width: 17rem;
   border-radius: 30px;
   border: 1px;
   background-color: #9f9f9f;
+  color: white;
+  font-weight: 600;
 }
 .active {
   background-color: #ec5056;

@@ -14,9 +14,10 @@ export default function CardUnlocked({ objeto }) {
         </div>
       </div>
 
-      <div>
-        <h4>{objeto.ally.description}</h4>
+      <div className={styles.container_img}>
+        <img src={objeto.vector_full_path} alt={objeto.ally.name} />
       </div>
+      <h4>{objeto.ally.description}</h4>
     </div>
   );
 }

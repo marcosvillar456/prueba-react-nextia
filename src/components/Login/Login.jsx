@@ -1,18 +1,16 @@
-import { Fragment } from "react";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../Redux/Actions";
+import { Fragment, useState } from "react";
 import { useHistory } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
 import styles from "./Login.module.css";
-import Modal from "../Modal/Modal";
+import { login } from "../../Redux/Actions";
+import ModalLogin from "../Modals/ModalLogin/ModalLogin";
 
 export function validate(input) {
   let errors = {};
   if (!input.Email) {
-    errors.Email = "";
+    errors.Email = "error Email";
   } else if (!input.password) {
-    errors.password = "";
+    errors.password = "error password";
   }
   return errors;
 }
@@ -20,10 +18,9 @@ export function validate(input) {
 export default function Login() {
   const [Input, setInput] = useState({ Email: "", password: "" });
   const [errors, setErrors] = useState({});
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState();
   const dispatch = useDispatch();
-  let Login = useSelector((state) => state.succes);
-  let history = useHistory();
+  const history = useHistory();
 
   function handleChange(e) {
     setInput({
@@ -38,22 +35,22 @@ export default function Login() {
     );
   }
 
-  function shoot() {
-    console.log("click");
-    setActive(true);
-  }
-
-  async function ingresar() {
+  async function ingresar(e) {
+    e.preventDefault();
     if (Object.keys(errors).length === 0) {
-      return await dispatch(login(Input.Email, Input.password));
+      const peticion = await dispatch(login(Input.Email, Input.password));
+      peticion === undefined ? setActive(true) : history.push("/home");
     }
   }
-  // eslint-disable-next-line no-unused-expressions
-  Login === true ? history.push("/home") : null;
-
+  function onKeyUp(e) {
+    var keycode = e.keyCode;
+    if (keycode === "13") {
+      ingresar(e);
+    }
+  }
   return (
     <Fragment>
-      <div className={styles.form}>
+      <form className={styles.form} onSubmit={(e) => ingresar(e)}>
         <input
           type="text"
           id="Email"
@@ -65,12 +62,14 @@ export default function Login() {
         />
         <input
           className={styles.input}
-          type="password"
-          id="password"
-          name="password"
+          type="Password"
+          id="Password"
+          name="Password"
           placeholder="Password"
           value={Input.password}
           onChange={handleChange}
+          autoComplete="on"
+          onKeyUp={(e) => onKeyUp(e)}
         />
         <div className={styles.forgotPassword}>
           <span>Olvide mi contraseña</span>
@@ -90,18 +89,14 @@ export default function Login() {
                 : true
               : true
           }`}
-          onClick={() => {
-            ingresar();
-          }}
+          type="submit"
         >
           Enviar
         </button>
-      </div>
-      {Login === false ? "Error" : null}
-      <div>
-        <button onClick={shoot}>Take the shot!</button>
-      </div>
-      <Modal active={active} set={setActive} />
+      </form>
+      {active === true ? (
+        <ModalLogin setActive={setActive} active={active} />
+      ) : null}
     </Fragment>
   );
 }

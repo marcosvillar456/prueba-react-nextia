@@ -2,6 +2,10 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  z-index: 2;
-  padding-top: 6rem;
+}
+.container_elemnts {
+  display: flex;
+  justify-content: center;
+
+  flex-wrap: wrap;
 }

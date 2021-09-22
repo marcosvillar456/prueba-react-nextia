@@ -8,9 +8,9 @@ import ModalLogin from "../Modals/ModalLogin/ModalLogin";
 export function validate(input) {
   let errors = {};
   if (!input.Email) {
-    errors.Email = "error Email";
+    errors.Email = "Email vacio";
   } else if (!input.Password) {
-    errors.Password = "error Password";
+    errors.Password = "Password Vacio";
   }
   return errors;
 }
@@ -21,7 +21,7 @@ export default function Login() {
   const [active, setActive] = useState();
   const dispatch = useDispatch();
   const history = useHistory();
-
+  const Token = localStorage.getItem("TokenAuthorization");
   function handleChange(e) {
     setInput({
       ...Input,
@@ -38,21 +38,28 @@ export default function Login() {
   async function ingresar(e) {
     e.preventDefault();
     if (Object.keys(errors).length === 0) {
-      const peticion = await dispatch(login(Input.Email, Input.Password));
-      peticion === undefined ? setActive(true) : history.push("/home");
+      await dispatch(login(Input.Email, Input.Password));
+      Token === null ? setActive(true) : history.push("/home");
     }
   }
+
   function onKeyUp(e) {
     var keycode = e.keyCode;
     if (keycode === "13") {
       ingresar(e);
     }
   }
+
   function inputCharacters(event) {
-    if (event.keyCode == 13) {
+    if (event.keyCode === 13) {
       document.getElementById("Password").focus();
     }
   }
+
+  if (Token !== null) {
+    history.push("/home");
+  }
+
   return (
     <Fragment>
       <form className={styles.form} onSubmit={(e) => ingresar(e)}>

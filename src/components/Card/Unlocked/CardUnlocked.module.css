@@ -1,11 +1,18 @@
 .card {
   word-wrap: break-word;
   border: 1px solid;
-  margin: 2rem;
-  width: 300px;
+  margin: 1rem;
+
+  width: 200px;
+  height: 320px;
+  border-radius: 20px;
   min-height: 300px;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 .container {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;

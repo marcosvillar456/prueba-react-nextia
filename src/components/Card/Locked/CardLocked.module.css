@@ -1,12 +1,14 @@
 .card {
   position: relative;
-  width: 320px;
-  height: 420px;
+  width: 200px;
+  height: 320px;
   border-radius: 20px;
   overflow: hidden;
   margin: 1rem;
   border-color: black;
   border: 1px solid;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .card .imgBx {

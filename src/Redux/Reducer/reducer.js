@@ -1,12 +1,9 @@
 const { LOGIN, GETWALLETS, GETLISTAS, LOGOUT } = require("../Constants");
 
 const initialState = {
-  login: null,
   Wallets: [],
   Locked: [],
   Unlocked: [],
-  token: "",
-  succes: null,
 };
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
@@ -15,7 +12,6 @@ export default function userReducer(state = initialState, action) {
         ...state,
         succes: action.payload.succes,
         login: action.payload.data,
-        token: action.payload.token,
       };
     }
     case LOGOUT: {
@@ -23,8 +19,7 @@ export default function userReducer(state = initialState, action) {
         ...state,
         Wallets: [],
         Locked: [],
-        unlocked: [],
-        token: "",
+        Unlocked: [],
       };
     }
 
@@ -38,7 +33,7 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         Locked: action.payload.locked,
-        unlocked: action.payload.unlocked,
+        Unlocked: action.payload.unlocked,
       };
     }
     default:

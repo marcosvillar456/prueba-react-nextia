@@ -8,14 +8,6 @@ import ModalLogout from "../Modals/ModalLogout/ModalLogout";
 export default function Menu() {
   const [active, setActive] = useState();
 
-  $(window).scroll(function () {
-    if (this.scrollY > 20) {
-      $(".navbar").addClass("sticky");
-    } else {
-      $(".navbar").removeClass("sticky");
-    }
-  });
-
   function myfunction() {
     $(".navbar .max-width .menu").toggleClass("active");
     $(".btn-menu i").toggleClass("active");

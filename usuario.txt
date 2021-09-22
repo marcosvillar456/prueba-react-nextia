@@ -1,3 +1,10 @@
 
 prueba@nextia.mx
 PruebaNextia2021
+
+  const Token = JSON.parse(localStorage.getItem("userInfo")).token;
+
+//localstorage token
+//ordenar por wallets            Authorization: JSON.parse(localStorage.getItem("userInfo")).token,
+
+  console.log(JSON.parse(localStorage.getItem("userInfo")).token);
